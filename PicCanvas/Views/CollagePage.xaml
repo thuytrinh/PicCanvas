@@ -1,0 +1,58 @@
+﻿<phone:PhoneApplicationPage x:Class="PicCanvas.Views.CollagePage"
+                            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                            xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+                            xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+                            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                            xmlns:v="clr-namespace:PicCanvas.Views"
+                            FontFamily="{StaticResource PhoneFontFamilyNormal}"
+                            FontSize="{StaticResource PhoneFontSizeNormal}"
+                            Foreground="{StaticResource PhoneForegroundBrush}"
+                            SupportedOrientations="Portrait"
+                            Orientation="Portrait"
+                            mc:Ignorable="d"
+                            shell:SystemTray.IsVisible="False">
+
+    <Grid x:Name="LayoutRoot"
+          Background="Transparent">
+
+        <v:CollageCanvas x:Name="CollageCanvas"
+                         Background="#1F1F1F"
+                         PhotosSource="{Binding Path=PhotoCollection}">
+
+            <v:CollageCanvas.PhotoTemplate>
+
+                <DataTemplate>
+
+                    <v:PhotoControl Stroke="White"
+                                    StrokeThickness="8"
+                                    PhotoFileName="{Binding FileName}">
+
+                        <v:PhotoControl.RenderTransform>
+
+                            <CompositeTransform CenterX="{Binding CenterX}"
+                                                CenterY="{Binding CenterY}"
+                                                TranslateX="{Binding TranslateX}"
+                                                TranslateY="{Binding TranslateY}"
+                                                ScaleX="{Binding Scale}"
+                                                ScaleY="{Binding Scale}"
+                                                Rotation="{Binding Rotation}" />
+                        </v:PhotoControl.RenderTransform>
+                    </v:PhotoControl>
+                </DataTemplate>
+            </v:CollageCanvas.PhotoTemplate>
+        </v:CollageCanvas>
+    </Grid>
+
+    <phone:PhoneApplicationPage.ApplicationBar>
+
+        <shell:ApplicationBar IsVisible="True"
+                              Opacity="0.5">
+
+            <shell:ApplicationBarIconButton IconUri="/Assets/Images/Add.png"
+                                            Text="Add"
+                                            Click="OnAddButtonClick" />
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+</phone:PhoneApplicationPage>
